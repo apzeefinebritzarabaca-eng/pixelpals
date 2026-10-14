@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Presentation</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #071827;
+  color: white;
+}
+
+.slide {
+  display: none;
+  min-height: 75vh;
+  padding: 40px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slide.active {
+  display: flex;
+}
+
+h1, h2 {
+  color: #55e6dc;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+p, li {
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+pre {
+  background: #102b40;
+  color: #b8f5dc;
+  padding: 20px;
+  border-radius: 10px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+button {
+  background: #55e6dc;
+  color: #071827;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 22px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#counter {
+  color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="slide active">
+  <h1>🐠 Dive Into JavaScript!</h1>
+  <p>Creating an Interactive Presentation</p>
+  <p>Topic: Preventing Overcrowded Fish Tanks</p>
+  <p>Presented by: Group 4 • Life Labs</p>
+</section>
+
+<section class="slide">
+  <h2>Slide 2: What Is JavaScript?</h2>
+  <p>JavaScript is a programming language that makes websites interactive.</p>
+  <ul>
+    <li>It can respond to button clicks.</li>
+    <li>It can display messages.</li>
+    <li>It can control which presentation slide is visible.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Slide 3: String Variables</h2>
+  <pre>const targetAudience = "teenagers";
+const primaryProblem = "overcrowded fish tanks";
+const educationalGoal =
+  "keep aquatic beings safe and healthy!";</pre>
+  <p>Variables store information. A string is text inside quotation marks.</p>
+</section>
+
+<section class="slide">
+  <h2>Slide 4: String Method</h2>
+  <pre>const loudProblem =
+  primaryProblem.toUpperCase();</pre>
+  <p>Before: overcrowded fish tanks</p>
+  <h1 id="uppercase">OVERCROWDED FISH TANKS</h1>
+  <p>The toUpperCase() method changes letters to uppercase.</p>
+</section>
+
+<section class="slide">
+  <h2>Slide 5: Concatenation</h2>
+  <pre>const introMessage =
+  "Hey " + targetAudience +
+  "! Did you know that " + loudProblem +
+  " is a massive problem in our environment? " +
+  "Our new educational content is here to help " +
+  "you learn how to " + educationalGoal +
+  " Let's dive in!";</pre>
+  <p>The + operator joins text and variable values into one message.</p>
+</section>
+
+<section class="slide">
+  <h2>Slide 6: Display the Output</h2>
+  <pre>console.log(introMessage);</pre>
+  <p>JavaScript displays the message in the browser console.</p>
+  <p>It can also place the message directly on our slide!</p>
+  <button onclick="showMessage()">Show Message</button>
+  <pre id="message">Click the button to display the message.</pre>
+</section>
+
+<section class="slide">
+  <h1>Thank You! 🐟</h1>
+  <p>JavaScript makes presentations interactive.</p>
+  <p>Variables • String Methods • Concatenation • Functions</p>
+</section>
+
+<nav class="controls">
+  <button onclick="move(-1)">← Back</button>
+  <span id="counter">1 / 7</span>
+  <button onclick="move(1)">Next →</button>
+</nav>
+
+<script>
+const targetAudience = "teenagers";
+const primaryProblem = "overcrowded fish tanks";
+const educationalGoal =
+  "keep aquatic beings safe and healthy!";
+
+const loudProblem = primaryProblem.toUpperCase();
+
+const introMessage =
+  "Hey " + targetAudience +
+  "! Did you know that " + loudProblem +
+  " is a massive problem in our environment? " +
+  "Our new educational content is here to help " +
+  "you learn how to " + educationalGoal +
+  " Let's dive in!";
+
+console.log(introMessage);
+
+function showMessage() {
+  document.getElementById("message").textContent =
+    introMessage;
+}
+
+let currentSlide = 0;
+
+const slides = document.querySelectorAll(".slide");
+
+function showSlide() {
+  slides.forEach((slide, index) => {
+    slide.classList.toggle(
+      "active",
+      index === currentSlide
+    );
+  });
+
+  document.getElementById("counter").textContent =
+    (currentSlide + 1) + " / " + slides.length;
+}
+
+function move(direction) {
+  currentSlide =
+    (currentSlide + direction + slides.length) %
+    slides.length;
+
+  showSlide();
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "ArrowRight") move(1);
+  if (event.key === "ArrowLeft") move(-1);
+});
+</script>
+
+</body>
+</html>
+Sent
